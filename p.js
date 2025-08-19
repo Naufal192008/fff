@@ -368,42 +368,54 @@ const products = [
         });
 
         orderForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('order-name').value;
-            const phone = document.getElementById('order-phone').value;
-            const purpose = document.getElementById('order-purpose').value;
-            const address = document.getElementById('order-address').value;
-            const note = document.getElementById('order-note').value;
-            
-            let message = `Halo, saya ingin memesan:\n\n`;
-            
-            cart.forEach(item => {
-                message += `- ${item.title} (${item.quantity} x ${formatPrice(item.price)})\n`;
-            });
-            
-            const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            message += `\nTotal: ${formatPrice(totalPrice)}\n\n`;
-            message += `Atas nama: ${name}\n`;
-            message += `No. HP: ${phone}\n`;
-            message += `Keperluan: ${purpose}\n`;
-            
-            if (address) {
-                message += `Alamat pengiriman: ${address}\n`;
-            }
-            
-            if (note) {
-                message += `Catatan tambahan: ${note}\n`;
-            }
-            
-            const encodedMessage = encodeURIComponent(message);
-            
-            window.open(`https://wa.me/6285710785244?text=${encodedMessage}`, '_blank');
-            
-            closeModal();
-            
-            showNotification('Pesanan Anda telah dikirim via WhatsApp!');
-        });
+    e.preventDefault();
+    
+    const name = document.getElementById('order-name').value;
+    const phone = document.getElementById('order-phone').value;
+    const purpose = document.getElementById('order-purpose').value;
+    const address = document.getElementById('order-address').value;
+    const note = document.getElementById('order-note').value;
+    const distance = parseFloat(document.getElementById('order-distance').value); // ambil jarak
+
+    // Hitung total belanja
+    const totalBelanja = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+    // Hitung ongkir
+    let ongkir = 0;
+    if (totalBelanja < 100000) {
+        // contoh: 1km = 5000, maksimal 25k
+        ongkir = Math.min(distance * 5000, 25000);
+    }
+
+    const grandTotal = totalBelanja + ongkir;
+
+    let message = `Halo, saya ingin memesan:\n\n`;
+    cart.forEach(item => {
+        message += `- ${item.title} (${item.quantity} x ${formatPrice(item.price)})\n`;
+    });
+
+    message += `\nTotal Belanja: ${formatPrice(totalBelanja)}\n`;
+    message += `Ongkir: ${formatPrice(ongkir)}\n`;
+    message += `Grand Total: ${formatPrice(grandTotal)}\n\n`;
+    message += `Atas nama: ${name}\n`;
+    message += `No. HP: ${phone}\n`;
+    message += `Keperluan: ${purpose}\n`;
+    
+    if (address) {
+        message += `Alamat pengiriman: ${address}\n`;
+    }
+    
+    if (note) {
+        message += `Catatan tambahan: ${note}\n`;
+    }
+
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/6285710785244?text=${encodedMessage}`, '_blank');
+    
+    closeModal();
+    showNotification('Pesanan Anda telah dikirim via WhatsApp!');
+});
+
 
         cartIcon.addEventListener('click', openCartModal);
         continueShoppingBtn.addEventListener('click', closeModal);
