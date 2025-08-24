@@ -375,15 +375,13 @@ const products = [
     const purpose = document.getElementById('order-purpose').value;
     const address = document.getElementById('order-address').value;
     const note = document.getElementById('order-note').value;
-    const distance = parseFloat(document.getElementById('order-distance').value); // ambil jarak
+    const distance = parseFloat(document.getElementById('order-distance').value);  
 
-    // Hitung total belanja
     const totalBelanja = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
-    // Hitung ongkir
     let ongkir = 0;
     if (totalBelanja < 100000) {
-        // contoh: 1km = 5000, maksimal 25k
+        
         ongkir = Math.min(distance * 5000, 25000);
     }
 
