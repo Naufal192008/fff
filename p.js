@@ -1,11 +1,11 @@
-const products = [
+ const products = [
             {
                 id: 1,
                 title: "DONUTS ORIGINAL",
                 category: "DONUTS ORI",
                 description: "Buket bunga mawar merah segar dengan packaging eksklusif, cocok untuk anniversary atau ungkapan cinta.",
-                price: 9000, // Harga diskon
-                original_price: 11000, // Harga asli (dicoret)
+                price: 9000,
+                original_price: 11000,
                 image: "polosa.png"
             },
             {
@@ -13,63 +13,64 @@ const products = [
                 title: "DONUTS DANCOW",
                 category: "DONUTS RASA",
                 description: "Donut ini memiliki rasa dancow,rasa manis,gurih dan lembut.",
-                price: 10000, // Harga diskon
-                original_price: 12000, // Harga asli (dicoret)
+                price: 10000,
+                original_price: 12000,
                 image: "ko.jpg"
             },
             {
                 id: 3,
-                title: "donut coklate",
+                title: "DONUT COKLAT",
                 category: "DONUTS RASA",
                 description: "Donut yang memiliki rasa manis,gurih dengan isian coklat yang elegan",
-                price: 10000, // Harga diskon
-                original_price: 12000, 
+                price: 10000,
+                original_price: 12000,
                 image: "ko.jpg"
             },
             {
                 id: 4,
-                title: "Donut strawberry ",
+                title: "DONUT STRAWBERRY",
                 category: "DONUTS RASA",
-                price: 10000, // Harga diskon
-                original_price: 12000, // Harga asli (dicoret)
+                description: "Donut dengan rasa strawberry yang segar dan manis",
+                price: 10000,
+                original_price: 12000,
                 image: "c60a726a-16bc-49e4-aee7-9cfe4c8e1b8f.png"
             },
             {
                 id: 5,
-                title: "Donut Macha",
+                title: "DONUT MATCHA",
                 category: "DONUTS RASA",
-                description: "Rasa macha yang manis dengan dalamnya isi coklat",
-                price: 10000, // Harga diskon
-                original_price: 12000, // Harga asli (dicoret)
+                description: "Rasa matcha yang manis dengan dalamnya isi coklat",
+                price: 10000,
+                original_price: 12000,
                 image: "mavc.png"
             },
             {
                 id: 6,
-                title: "Paket promo",
+                title: "PAKET PROMO",
                 category: "paket",
-                description: "beli 2 yang rasa dancow dengan isian coklat yang gurih",
-                price: 16500, // Harga diskon
-                original_price: 18000,
+                description: "Beli 2 donut rasa dancow dengan isian coklat yang gurih",
+                price: 18000,
+                original_price: 24000,
                 image: "ko.jpg"
             },
             {
                 id: 7,
-                title: "SPECIA ISI 3 DONUT",
-                category: "semua",
-                description: "donuts rasa dancow dengan isian cokolate,TIRAMISU,DAN BISA REQUEST",                
-                price: 30876, // Harga diskon
-                original_price: 35000, // Harga asli (dicoret)
+                title: "SPECIAL ISI 3 DONUT",
+                category: "paket",
+                description: "Donuts rasa dancow dengan isian coklat, tiramisu, dan bisa request",                
+                price: 29500,
+                original_price: 35000,
                 image: "PAKETN3.png"
             },
             {
-    id: 8,
-    title: "10 paket isi campur",
-    category: "paket",
-    description: "10 paket donut isi campur yang lezat dan bervariasi.",
-    price: 165999, // Harga diskon
-    original_price: 240000, // Harga asli (dicoret)
-    image: "OP.png"
-},
+                id: 8,
+                title: "10 PAKET ISI CAMPUR",
+                category: "paket",
+                description: "10 paket donut isi campur yang lezat dan bervariasi.",
+                price: 166000,
+                original_price: 240000,
+                image: "OP.png"
+            }
         ];
 
         let cart = [];
@@ -103,35 +104,29 @@ const products = [
             }
             
             filteredProducts.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        productCard.innerHTML = `
-            <div class="product-img">
-                <img src="${product.image}" alt="${product.title}">
-            </div>
-            <div class="product-info">
-                <span class="product-category">${getCategoryName(product.category)}</span>
-                <h3 class="product-title">${product.title}</h3>
-                <p class="product-desc">${product.description}</p>
-                <div class="product-price">
-                    ${product.original_price ? 
-                        `<s>${formatPrice(product.original_price)}</s>` : 
-                        ''
-                    }
-                    <span class="current-price">${formatPrice(product.price)}</span>
-                    ${product.original_price ? 
-                        `<span class="discount-badge">Hemat ${formatPrice(product.original_price - product.price)}</span>` : 
-                        ''
-                    }
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">Tambah ke Keranjang</button>
-                    <button class="btn btn-secondary quick-order" data-id="${product.id}">Pesan Langsung</button>
-                </div>
-            </div>
-        `;
-        productGrid.appendChild(productCard);
-    });
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-img">
+                        <img src="${product.image}" alt="${product.title}">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">${product.category}</span>
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-desc">${product.description}</p>
+                        <div class="product-price-container">
+                            <span class="original-price">Rp ${product.original_price.toLocaleString('id-ID')},00</span>
+                            <span class="current-price">Rp ${product.price.toLocaleString('id-ID')},00</span>
+                            <span class="discount-badge">Hemat Rp ${(product.original_price - product.price).toLocaleString('id-ID')},00</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-secondary add-to-cart" data-id="${product.id}">Tambah ke Keranjang</button>
+                            <button class="btn btn-primary quick-order" data-id="${product.id}">Pesan Langsung</button>
+                        </div>
+                    </div>
+                `;
+                productGrid.appendChild(productCard);
+            });
             
             document.querySelectorAll('.add-to-cart').forEach(btn => {
                 btn.addEventListener('click', addToCart);
@@ -140,19 +135,6 @@ const products = [
             document.querySelectorAll('.quick-order').forEach(btn => {
                 btn.addEventListener('click', quickOrder);
             });
-        }
-        function getCategoryName(category) {
-            const names = {
-                'bunga': 'Buket Bunga',
-                'snack': 'Buket Snack',
-                'uang': 'Buket Uang',
-                'boneka': 'Buket Boneka'
-            };
-            return names[category] || category;
-        }
-
-        function formatPrice(price) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price);
         }
 
         function addToCart(e) {
@@ -213,7 +195,7 @@ const products = [
                     </div>
                     <div class="cart-item-details">
                         <h4 class="cart-item-title">${item.title}</h4>
-                        <p class="cart-item-price">${formatPrice(item.price)}</p>
+                        <p class="cart-item-price">Rp ${item.price.toLocaleString('id-ID')},00</p>
                     </div>
                     <div class="cart-item-quantity">
                         <button class="quantity-btn minus" data-id="${item.id}">-</button>
@@ -225,7 +207,7 @@ const products = [
                 cartItems.appendChild(cartItem);
             });
             
-            cartTotal.textContent = formatPrice(totalPrice);
+            cartTotal.textContent = `Rp ${totalPrice.toLocaleString('id-ID')},00`;
             
             document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
                 btn.addEventListener('click', decreaseQuantity);
@@ -318,7 +300,7 @@ const products = [
                 li.style.marginBottom = '10px';
                 li.style.paddingBottom = '10px';
                 li.style.borderBottom = '1px solid #eee';
-                li.textContent = `${item.title} - ${item.quantity} x ${formatPrice(item.price)}`;
+                li.textContent = `${item.title} - ${item.quantity} x Rp ${item.price.toLocaleString('id-ID')},00`;
                 list.appendChild(li);
             });
             
@@ -328,7 +310,7 @@ const products = [
             const totalEl = document.createElement('p');
             totalEl.style.marginTop = '10px';
             totalEl.style.fontWeight = 'bold';
-            totalEl.textContent = `Total: ${formatPrice(totalPrice)}`;
+            totalEl.textContent = `Total: Rp ${totalPrice.toLocaleString('id-ID')},00`;
             orderProducts.appendChild(totalEl);
             
             cartModal.style.display = 'none';
@@ -368,52 +350,50 @@ const products = [
         });
 
         orderForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('order-name').value;
-    const phone = document.getElementById('order-phone').value;
-    const purpose = document.getElementById('order-purpose').value;
-    const address = document.getElementById('order-address').value;
-    const note = document.getElementById('order-note').value;
-    const distance = parseFloat(document.getElementById('order-distance').value);  
+            e.preventDefault();
+            
+            const name = document.getElementById('order-name').value;
+            const phone = document.getElementById('order-phone').value;
+            const purpose = document.getElementById('order-purpose').value;
+            const address = document.getElementById('order-address').value;
+            const note = document.getElementById('order-note').value;
+            const distance = parseFloat(document.getElementById('order-distance').value);  
 
-    const totalBelanja = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const totalBelanja = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
-    let ongkir = 0;
-    if (totalBelanja < 100000) {
-        
-        ongkir = Math.min(distance * 5000, 25000);
-    }
+            let ongkir = 0;
+            if (totalBelanja < 100000) {
+                ongkir = Math.min(distance * 5000, 25000);
+            }
 
-    const grandTotal = totalBelanja + ongkir;
+            const grandTotal = totalBelanja + ongkir;
 
-    let message = `Halo, saya ingin memesan:\n\n`;
-    cart.forEach(item => {
-        message += `- ${item.title} (${item.quantity} x ${formatPrice(item.price)})\n`;
-    });
+            let message = `Halo, saya ingin memesan:\n\n`;
+            cart.forEach(item => {
+                message += `- ${item.title} (${item.quantity} x Rp ${item.price.toLocaleString('id-ID')},00)\n`;
+            });
 
-    message += `\nTotal Belanja: ${formatPrice(totalBelanja)}\n`;
-    message += `Ongkir: ${formatPrice(ongkir)}\n`;
-    message += `Grand Total: ${formatPrice(grandTotal)}\n\n`;
-    message += `Atas nama: ${name}\n`;
-    message += `No. HP: ${phone}\n`;
-    message += `Keperluan: ${purpose}\n`;
-    
-    if (address) {
-        message += `Alamat pengiriman: ${address}\n`;
-    }
-    
-    if (note) {
-        message += `Catatan tambahan: ${note}\n`;
-    }
+            message += `\nTotal Belanja: Rp ${totalBelanja.toLocaleString('id-ID')},00\n`;
+            message += `Ongkir: Rp ${ongkir.toLocaleString('id-ID')},00\n`;
+            message += `Grand Total: Rp ${grandTotal.toLocaleString('id-ID')},00\n\n`;
+            message += `Atas nama: ${name}\n`;
+            message += `No. HP: ${phone}\n`;
+            message += `Keperluan: ${purpose}\n`;
+            
+            if (address) {
+                message += `Alamat pengiriman: ${address}\n`;
+            }
+            
+            if (note) {
+                message += `Catatan tambahan: ${note}\n`;
+            }
 
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/6285710785244?text=${encodedMessage}`, '_blank');
-    
-    closeModal();
-    showNotification('Pesanan Anda telah dikirim via WhatsApp!');
-});
-
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/6285710785244?text=${encodedMessage}`, '_blank');
+            
+            closeModal();
+            showNotification('Pesanan Anda telah dikirim via WhatsApp!');
+        });
 
         cartIcon.addEventListener('click', openCartModal);
         continueShoppingBtn.addEventListener('click', closeModal);
@@ -441,8 +421,6 @@ const products = [
             });
         });
 
-        
-
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 if (this.getAttribute('href') !== '#') {
@@ -460,53 +438,32 @@ const products = [
             });
         });
 
-       // Di file p.js atau sebelum </body>
-document.addEventListener('DOMContentLoaded', function() {
-    const slider = document.querySelector('.testimonial-slider');
-    const prevBtn = document.querySelector('.prev-testimonial');
-    const nextBtn = document.querySelector('.next-testimonial');
-    
-    if (slider && prevBtn && nextBtn) {
-        const itemWidth = document.querySelector('.testimonial-item').offsetWidth;
-        const gap = 30;
-        
-        nextBtn.addEventListener('click', () => {
-            slider.scrollBy({
-                left: itemWidth + gap,
-                behavior: 'smooth'
-            });
-        });
-        
-        prevBtn.addEventListener('click', () => {
-            slider.scrollBy({
-                left: -(itemWidth + gap),
-                behavior: 'smooth'
-            });
-        });
-    }
-});
-
-displayProducts();
-
-const style = document.createElement('style');
-style.textContent = `
-    .notification {
-                position: fixed;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: var(--primary);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 5px;
-                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-                z-index: 3000;
-                opacity: 0;
-                transition: opacity 0.3s;
-            }
+        // Testimonial slider functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.testimonial-slider');
+            const prevBtn = document.querySelector('.prev-testimonial');
+            const nextBtn = document.querySelector('.next-testimonial');
             
-            .notification.show {
-                opacity: 1;
+            if (slider && prevBtn && nextBtn) {
+                const itemWidth = document.querySelector('.testimonial-item').offsetWidth;
+                const gap = 30;
+                
+                nextBtn.addEventListener('click', () => {
+                    slider.scrollBy({
+                        left: itemWidth + gap,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                prevBtn.addEventListener('click', () => {
+                    slider.scrollBy({
+                        left: -(itemWidth + gap),
+                        behavior: 'smooth'
+                    });
+                });
             }
-        `;
-        document.head.appendChild(style);
+        });
+
+        // Initial display
+        displayProducts();
+        updateCart();   
